@@ -22,10 +22,7 @@ class Map extends React.Component {
 
   componentDidMount() {
 
-    this.updateWindowDimensions()
-    window.addEventListener('resize', this.updateWindowDimensions)
-    window.addEventListener('orientationchange', this.updateWindowDimensions)
-    this.mapContainer.addEventListener('touchmove', (e) => { e.preventDefault() }, { passive: false })
+    this.setupMapWindow()
 
     this.map = new MapboxGL.Map({
       container: this.mapContainer,
@@ -79,10 +76,11 @@ class Map extends React.Component {
 
   }
 
-  componentWillUnmount() {
-    setTimeout(() => this.map.remove(), 300)
-    window.removeEventListener('resize', this.updateWindowDimensions)
-    window.removeEventListener('orientationchange', this.updateWindowDimensions)
+  setupMapWindow = () => {
+    this.updateWindowDimensions()
+    window.addEventListener('resize', this.updateWindowDimensions)
+    window.addEventListener('orientationchange', this.updateWindowDimensions)
+    this.mapContainer.addEventListener('touchmove', (e) => { e.preventDefault() }, { passive: false })
   }
 
   updateWindowDimensions = () => {
@@ -95,6 +93,13 @@ class Map extends React.Component {
     if (!this.map) return
     this.map.resize()
   }
+
+  componentWillUnmount() {
+    setTimeout(() => this.map.remove(), 300)
+    window.removeEventListener('resize', this.updateWindowDimensions)
+    window.removeEventListener('orientationchange', this.updateWindowDimensions)
+  }
+
 
   render() {
     const mapstyle = {
