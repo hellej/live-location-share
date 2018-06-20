@@ -7,14 +7,14 @@ import notificationReducer from './reducers/notificationReducer'
 import loginFormReducer from './reducers/loginFormReducer'
 import signUpFormReducer from './reducers/signUpFormReducer'
 import locationRequestFormReducer from './reducers/locationRequestFormReducer'
-import locationShareFormReducer from './reducers/locationShareFormReducer';
+import locationShareReducer from './reducers/locationShareReducer'
 
 const reducer = combineReducers({
   notification: notificationReducer,
   loginForm: loginFormReducer,
   signUpForm: signUpFormReducer,
   locationRequestForm: locationRequestFormReducer,
-  locationShareForm: locationShareFormReducer
+  locationShare: locationShareReducer
 })
 
 const store = createStore(
