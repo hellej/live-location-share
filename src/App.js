@@ -20,8 +20,8 @@ class App extends Component {
         <div>
           <Route exact path='/' render={() =>
             <StyledMenuContainer>
-              <StyledNavLink to='/requestlocation' activeClassName={'active'} > Follow Location </StyledNavLink>
               <StyledNavLink to='/locationshare' activeClassName={'active'} > Share Location </StyledNavLink>
+              <StyledNavLink to='/requestlocation' activeClassName={'active'} > Follow Location </StyledNavLink>
               {/* <StyledNavLink to='/signup' activeClassName={'active'} > Sign Up </StyledNavLink>
               <StyledNavLink to='/login' activeClassName={'active'} > Login </StyledNavLink> */}
             </StyledMenuContainer>}
