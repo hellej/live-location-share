@@ -6,6 +6,7 @@ import history, { sameHistoryLocation } from './../history'
 import { Button } from './Buttons'
 import { StyledFormContainer, Input } from './StyledFormElements'
 import { submitLocationShareStart, handleLocationExpireTimeChange, closeLocationShareForm } from '../reducers/locationShareFormReducer'
+import { submitLocationShareStart, handleLocationExpireTimeChange, closeLocationShareForm } from '../reducers/locationShareReducer'
 
 
 export const StyledLoginButtonDiv = styled.div`
@@ -48,6 +49,7 @@ class LocationShareForm extends React.Component {
           {error && <StyledError>{error.message}</StyledError>}
           <StyledLoginButtonDiv>
             <Button submit onClick={(e) => submitLocationShareStart(e, locationShareForm)}> Send Request </Button>
+            <Button submit onClick={(e) => submitLocationShareStart(e, locationShare)}> Start Sharing </Button>
             <Button cancel onClick={(e) => closeLocationShareForm(e)}> Cancel </Button>
           </StyledLoginButtonDiv>
         </form>
@@ -59,7 +61,7 @@ class LocationShareForm extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  locationShareForm: state.locationShareForm
+  locationShare: state.locationShare
 })
 
 const mapDispatchToProps = {
