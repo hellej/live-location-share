@@ -8,7 +8,7 @@ import { StyledFormContainer, Input } from './StyledFormElements'
 import { handleLoginFormChange, submitLogin, closeLoginForm, openSignUpForm } from './../reducers/loginFormReducer'
 
 
-export const StyledLoginButtonDiv = styled.div`
+export const StyledButtonDiv = styled.div`
   align-items: center;
   border-radius: 7px; 
   display: flex;
@@ -54,11 +54,11 @@ class LoginForm extends React.Component {
             onChange={handleLoginFormChange}
           />
           {error && <StyledError>{error.message}</StyledError>}
-          <StyledLoginButtonDiv>
+          <StyledButtonDiv>
             <Button submit disabled={isInvalid} onClick={(e) => submitLogin(e, loginForm)}> Login </Button>
             <Button signup onClick={(e) => openSignUpForm(e)}> Sign Up </Button>
             <Button cancel onClick={(e) => closeLoginForm(e)}> Cancel </Button>
-          </StyledLoginButtonDiv>
+          </StyledButtonDiv>
         </form>
       </StyledFormContainer>
     )
