@@ -17,14 +17,14 @@ export const StyledButtonDiv = styled.div`
 `
 const StyledError = styled.div`
   color: white;
-  font-size: 13px
+  font-size: 15px
   font-style: italic;
   font-weight: 300;
   padding: 5px 0px;
 `
 const StyledText = styled.span`
   color: white;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
   align-items: flex-start;  
   margin: auto;
@@ -35,6 +35,7 @@ const SelectWrapper = styled.div`
   box-sizing: border-box;
   background: transparent;
   background-clip: border-box;
+  margin: auto;
   color: white;
   display: flex;
   flex-direction: row;
@@ -50,12 +51,13 @@ const StyledSelect = styled.select`
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.9);
   color: white;
+  font-size: 14px;
   cursor: pointer;
   display: inline-block;
   height: 30px; //2.6em;
-  margin: 0px 10px 0px 0px;
+  //margin: 0px 15px 0px 0px;
   text-align: center;
-  width: 65px;
+  width: 75px;
   padding-left: 13px;
   vertical-align: middle;
   -webkit-appearance: none!important;
