@@ -22,8 +22,8 @@ class App extends Component {
             <StyledMenuContainer>
               <StyledNavLink to='/requestlocation' activeClassName={'active'} > Follow Location </StyledNavLink>
               <StyledNavLink to='/locationshare' activeClassName={'active'} > Share Location </StyledNavLink>
-              <StyledNavLink to='/signup' activeClassName={'active'} > Sign Up </StyledNavLink>
-              <StyledNavLink to='/login' activeClassName={'active'} > Login </StyledNavLink>
+              {/* <StyledNavLink to='/signup' activeClassName={'active'} > Sign Up </StyledNavLink>
+              <StyledNavLink to='/login' activeClassName={'active'} > Login </StyledNavLink> */}
             </StyledMenuContainer>}
           />
           <Route path='/login' render={({ location }) => <LoginForm location={location} />} />
