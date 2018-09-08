@@ -1,52 +1,41 @@
-
 import React from 'react'
-import MapboxGL from 'mapbox-gl/dist/mapbox-gl.js'
-
-
-const geoOptions = {
-  enableHighAccuracy: true,
-  maximumAge: 30000,
-  timeout: 27000
-}
+import { connect } from 'react-redux'
+import { getLoadedLayerFromMap } from './../../mapboxhelper'
 
 class UserLocation extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      location: null
-    }
+  layerId = 'userLocation'
+
+  circleStyle = {
+    'circle-color': 'transparent',
+    'circle-stroke-color': '#00c7ff',
+    'circle-radius': 7,
+    'circle-stroke-width': 2
   }
 
   componentDidMount() {
-    const map = this.props.map
-
-    const geoLocater = new MapboxGL.GeolocateControl({
-      positionOptions: { enableHighAccuracy: true }, trackUserLocation: true
-    })
-
+    const { map, userLocation } = this.props
     map.on('load', () => {
-      map.addControl(geoLocater)
+      map.addSource(this.layerId, { type: 'geojson', data: userLocation })
+      map.addLayer({ id: this.layerId, source: this.layerId, type: 'circle', paint: this.circleStyle })
     })
-
-    navigator.geolocation.watchPosition(this.trackLocation, this.geoError, geoOptions)
   }
 
-  trackLocation = (pos) => {
-    const lat = pos.coords.latitude
-    const lon = pos.coords.longitude
-    console.log('tracked: ', lat, ' ', lon)
-  }
-
-  geoError = (error) => {
-    console.log('no location available')
+  componentDidUpdate = async (prevProps) => {
+    const { userLocation, map } = this.props
+    const layer = await getLoadedLayerFromMap(map, this.layerId)
+    layer.setData(userLocation)
   }
 
   render() {
     return null
   }
-
 }
 
+const mapStateToProps = (state) => ({
+  userLocation: state.userLocation.userLocation
+})
 
-export default UserLocation
+const ConnectedUserLocation = connect(mapStateToProps, null)(UserLocation)
+
+export default ConnectedUserLocation

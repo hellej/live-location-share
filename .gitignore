@@ -29,3 +29,6 @@ yarn-error.log*
 /deploy.sh
 /database.rules.json
 .firebaserc
+
+# drafts
+/src/components/drafts

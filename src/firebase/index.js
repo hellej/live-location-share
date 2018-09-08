@@ -1,9 +1,7 @@
-//import firebase from './firebase'
-//import * as featureService from './db/features'
-import * as userService from './db/users'
+import firebase from './firebase'
+import * as locationShareService from './db/locationShares'
 
 export {
-  // firebase,
-  // featureService,
-  userService
+  firebase,
+  locationShareService
 }

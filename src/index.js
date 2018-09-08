@@ -5,7 +5,6 @@ import App from './App'
 import { Provider } from 'react-redux'
 import store from './store'
 
-
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
@@ -14,7 +13,6 @@ const render = () => {
     document.getElementById('root')
   )
 }
-
 
 render()
 store.subscribe(render)

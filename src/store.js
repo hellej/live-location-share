@@ -2,19 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 
-
-import notificationReducer from './reducers/notificationReducer'
-import loginFormReducer from './reducers/loginFormReducer'
-import signUpFormReducer from './reducers/signUpFormReducer'
-import locationRequestFormReducer from './reducers/locationRequestFormReducer'
 import locationShareReducer from './reducers/locationShareReducer'
+import locationTrackReducer from './reducers/locationTrackReducer'
+import userLocationReducer from './reducers/userLocationReducer'
 
 const reducer = combineReducers({
-  notification: notificationReducer,
-  loginForm: loginFormReducer,
-  signUpForm: signUpFormReducer,
-  locationRequestForm: locationRequestFormReducer,
-  locationShare: locationShareReducer
+  locationShare: locationShareReducer,
+  locationTrack: locationTrackReducer,
+  userLocation: userLocationReducer,
 })
 
 const store = createStore(

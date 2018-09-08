@@ -1,9 +1,7 @@
-
 import React from 'react'
 import MapboxGL from 'mapbox-gl/dist/mapbox-gl.js'
 
 MapboxGL.accessToken = process.env.REACT_APP_MB_ACCESS || 'Mapbox token is needed in order to use the map'
-
 
 class Map extends React.Component {
 
@@ -26,7 +24,7 @@ class Map extends React.Component {
 
     this.map = new MapboxGL.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/joose/cji6cyfdf04pp2slcms30y642',
+      style: 'mapbox://styles/mapbox/streets-v9',
       center: this.state.initialCenter,
       zoom: 10,
       boxZoom: false,
@@ -47,6 +45,7 @@ class Map extends React.Component {
       this.map.fire('flystart')
       this.map.flyTo({ center: this.state.initialCenter, speed: 0.1, curve: 1, zoom: 10.15, maxDuration: 1500 })
       this.setState({ loaded: true, isReady: true })
+      this.map.addControl(new MapboxGL.NavigationControl(), 'bottom-right')
     })
 
     this.map.on('moveend', () => {
@@ -63,9 +62,7 @@ class Map extends React.Component {
       this.map.scrollZoom.enable()
       this.setState({ flying: false })
     })
-
   }
-
 
   componentDidUpdate(prevProps, prevState) {
     if (!this.map) return
@@ -73,7 +70,6 @@ class Map extends React.Component {
     if (!prevState.isReady && this.state.isReady) {
       console.log('map ready')
     }
-
   }
 
   setupMapWindow = () => {
@@ -100,7 +96,6 @@ class Map extends React.Component {
     window.removeEventListener('orientationchange', this.updateWindowDimensions)
   }
 
-
   render() {
     const mapstyle = {
       position: 'relative',
@@ -125,6 +120,5 @@ class Map extends React.Component {
     )
   }
 }
-
 
 export default Map

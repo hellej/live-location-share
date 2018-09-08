@@ -1,38 +1,49 @@
 import React, { Component } from 'react'
 import { Router, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import history from './history'
-import { StyledMenuContainer } from './components/StyledLayout'
-import { StyledNavLink } from './components/Buttons'
+import { StyledMenuContainer, FlexMarginAuto } from './components/StyledLayout'
+import { Button } from './components/Buttons'
 import Map from './components/map/Map'
+import SharedLocation from './components/map/SharedLocation'
+import TrackedLocation from './components/map/TrackedLocation'
 import UserLocation from './components/map/UserLocation'
-import LoginForm from './components/LoginForm'
-import SignUpForm from './components/SignUpForm'
-import LocationShareForm from './components/LocationShareForm'
-import LocationRequestForm from './components/LocationRequestForm'
-
+import { trackUserLocation } from './reducers/userLocationReducer'
+import { submitLocationShareStart } from './reducers/locationShareReducer'
+import { submitLocationRequest } from './reducers/locationTrackReducer'
+import TrackLocationStarter from './components/TrackLocationStarter'
+import LocationShareStarter from './components/LocationShareStarter'
+import LocationShareMonitor from './components/LocationShareMonitor'
+import TrackLocationMonitor from './components/TrackLocationMonitor'
 
 class App extends Component {
+
+  componentDidMount = () => {
+    this.props.trackUserLocation()
+  }
 
   render() {
     return (
       <Router history={history} >
         <div>
-          <Route exact path='/' render={() =>
-            <StyledMenuContainer>
-              <StyledNavLink to='/locationshare' activeClassName={'active'} > Share Location </StyledNavLink>
-              <StyledNavLink to='/requestlocation' activeClassName={'active'} > Follow Location </StyledNavLink>
-              {/* <StyledNavLink to='/signup' activeClassName={'active'} > Sign Up </StyledNavLink>
-              <StyledNavLink to='/login' activeClassName={'active'} > Login </StyledNavLink> */}
-            </StyledMenuContainer>}
-          />
-          <Route path='/login' render={({ location }) => <LoginForm location={location} />} />
-          <Route path='/signup' render={({ location }) => <SignUpForm location={location} />} />
-          <Route path='/requestlocation' render={({ location }) => <LocationRequestForm location={location} />} />
-          <Route path='/locationshare' render={({ location }) => <LocationShareForm location={location} />} />
-
+          <StyledMenuContainer>
+            <Route exact path='/' render={() =>
+              <FlexMarginAuto>
+                <Button onClick={(e) => this.props.submitLocationShareStart(e)}>Share Location</Button>
+                <Button onClick={(e) => this.props.submitLocationRequest(e)}>Request Location</Button>
+              </FlexMarginAuto>}
+            />
+            <Route exact path='/tracklocation' component={TrackLocationStarter} />
+            <Route path='/tracklocation/:id' component={TrackLocationStarter} />
+            <Route path='/sharelocation/:id' component={LocationShareStarter} />
+            <LocationShareMonitor />
+            <TrackLocationMonitor />
+          </StyledMenuContainer>
           <Map>
             <UserLocation />
+            <SharedLocation />
+            <TrackedLocation />
           </Map>
         </div>
       </Router>
@@ -40,4 +51,12 @@ class App extends Component {
   }
 }
 
-export default App
+const mapDispatchToProps = {
+  trackUserLocation,
+  submitLocationShareStart,
+  submitLocationRequest
+}
+
+const ConnectedApp = connect(null, mapDispatchToProps)(App)
+
+export default ConnectedApp
