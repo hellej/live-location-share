@@ -24,13 +24,13 @@ class LocationShareMonitor extends React.Component {
     if (locationShare.sharing) {
       return (
         <StyledMonitorDiv>
-          <InfoBlock onClick={() => history.push('/')}>
+          <InfoBlock button onClick={() => history.push('/')}>
             Menu
           </InfoBlock>
-          <InfoBlock onClick={this.props.stopSharingLocation}>
+          <InfoBlock button onClick={this.props.stopSharingLocation}>
             Stop Sharing
           </InfoBlock>
-          <InfoBlock onClick={this.toggleLinkVisibility}>
+          <InfoBlock button onClick={this.toggleLinkVisibility}>
             <StyledFaLocationArrow />
             {' '}{this.state.linkVisible ? 'Hide Link' : 'Show Link'}
           </InfoBlock>

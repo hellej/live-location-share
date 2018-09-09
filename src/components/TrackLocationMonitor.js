@@ -26,7 +26,7 @@ class TrackLocationMonitor extends React.Component {
     if (locationTrack.tracking) {
       return (
         <StyledMonitorDiv>
-          <InfoBlock onClick={() => history.push('/')}>
+          <InfoBlock button onClick={() => history.push('/')}>
             Menu
           </InfoBlock>
           <InfoBlock splitted>
