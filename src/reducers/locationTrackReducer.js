@@ -78,7 +78,7 @@ const locationTrackReducer = (store = initialLocation, action) => {
       return { ...store, shareLink: action.link, tracking: true }
 
     case 'SET_TRACKING_ON':
-      return { ...store, tracking: true, id: action.shareId }
+      return { ...store, tracking: true, id: action.id }
 
     case 'RESET_LOCATION_TRACK':
       return initialLocation
@@ -127,14 +127,15 @@ export const setLastUpdatedTime = () => {
 
 export const createLocationRequest = () => {
   return async (dispatch) => {
-    const shareId = await locationShareService.addLocationShare()
-    dispatch({ type: 'SET_TRACKING_ON', shareId })
-    history.push(`/tracklocation/${shareId}`)
+    const id = await locationShareService.addLocationShare()
+    console.log('created request with id: ', id)
+    dispatch({ type: 'SET_TRACKING_ON', id })
+    history.push(`/tracklocation/${id}`)
   }
 }
 
-const getShareLocationLink = (shareId) => {
-  return `https://livelocationdemo.firebaseapp.com/sharelocation/${shareId}`
+const getShareLocationLink = (id) => {
+  return `https://livelocationdemo.firebaseapp.com/sharelocation/${id}`
 }
 
 export default locationTrackReducer
