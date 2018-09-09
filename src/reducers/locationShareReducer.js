@@ -62,11 +62,7 @@ const locationShareReducer = (store = initialLocation, action) => {
   }
 }
 
-export const handleLocationExpireTimeChange = (e) => {
-  return { type: 'UPDATE_LOCATION_FORM', name: e.target.name, value: e.target.value }
-}
-
-export const submitLocationShareStart = (e) => {
+export const createLocationShare = (e) => {
   e.preventDefault()
   return async (dispatch) => {
     dispatch({ type: 'SET_SHARING_TRUE' })
@@ -107,13 +103,6 @@ export const stopSharingLocation = (shareId) => {
   return async (dispatch) => {
     history.push('/')
     dispatch({ type: 'STOP_SHARING_LOCATION' })
-  }
-}
-
-export const closeLocationShareForm = (e) => {
-  e.preventDefault()
-  return (dispatch) => {
-    history.push('/')
   }
 }
 

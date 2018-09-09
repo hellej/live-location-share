@@ -125,19 +125,11 @@ export const setLastUpdatedTime = () => {
   }
 }
 
-export const getLocationShareRequest = () => {
+export const createLocationRequest = () => {
   return async (dispatch) => {
     const shareId = await locationShareService.addLocationShare()
     dispatch({ type: 'SET_TRACKING_ON', shareId })
     history.push(`/tracklocation/${shareId}`)
-  }
-}
-
-export const submitLocationRequest = (e) => {
-  e.preventDefault()
-  return (dispatch) => {
-    dispatch({ type: 'SUBMIT_LOCATION_REQUEST' })
-    history.push('/tracklocation')
   }
 }
 

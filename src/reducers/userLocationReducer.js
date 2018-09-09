@@ -13,7 +13,6 @@ const geoOptions = {
 const userLocationReducer = (store = initialUserLocation, action) => {
 
   switch (action.type) {
-
     case 'UPDATE_USER_LOCATION': {
       const locationHistory = store.locationHistory
       return {
@@ -22,7 +21,6 @@ const userLocationReducer = (store = initialUserLocation, action) => {
         userLocation: action.geoJSONPoint
       }
     }
-
     case 'RESET_USER_LOCATION':
       return initialUserLocation
 

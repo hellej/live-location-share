@@ -2,50 +2,7 @@ import React from 'react'
 import history from './../history'
 import { connect } from 'react-redux'
 import { stopTrackingLocation } from '../reducers/locationTrackReducer'
-import styled, { css } from 'styled-components'
-
-const StyledMonitorDiv = styled.div`
-  max-width: 95%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  letter-spacing: 0.6px;
-  max-width: 95%;
-`
-const Info = styled.div`
-  display: ${props => props.hidden ? 'none' : ''};
-  padding: 6px 13px 6px 13px;
-  padding-right: ${props => props.splitted ? '0px' : '13px'};
-  background-color: rgba(0, 40, 0, 0.95);
-  margin: 5px 10px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 300;
-  color: white;
-  font-size: 17px;
-  width: max-content;
-  max-width: 90%;  
-  overflow: auto;
-  height: min-content;
-  pointer-events: auto;
-  ${props => props.link && css`
-  width: min-content;
-  max-width: 90%;
-  `}
-`
-const StyledShareLink = styled.a`
-  color: white;
-`
-const Value = styled.span`
-  background-color: rgba(0, 86, 90, 0.95);
-  padding: 6px 10px 6px 6px;
-  border-radius 0 30px 30px 0;
-  margin-left: 7px;
-  pointer-events: auto;
-`
-const OnOff = styled(Value)`
-  cursor: pointer;
-`
+import { StyledMonitorDiv, InfoBlock, InfoBlockValue } from './StyledLayout'
 
 class TrackLocationMonitor extends React.Component {
 
@@ -62,54 +19,53 @@ class TrackLocationMonitor extends React.Component {
 
   render() {
     const locationTrack = this.props.locationTrack
-    const lastUpdated = locationTrack.lastUpdatedTimeElapsed !== null
-      ? locationTrack.lastUpdatedTimeElapsed + ' s'
-      : 'waiting'
+    const lastUpdated = locationTrack.lastUpdatedTimeElapsed === null
+      ? 'waiting'
+      : locationTrack.lastUpdatedTimeElapsed + ' s'
 
     if (locationTrack.tracking) {
       return (
         <StyledMonitorDiv>
-          <Info onClick={() => history.push('/')}>
+          <InfoBlock onClick={() => history.push('/')}>
             Menu
-          </Info>
-          <Info splitted={true} >
+          </InfoBlock>
+          <InfoBlock splitted>
             Tracking
-            <OnOff onClick={() => this.props.stopTrackingLocation()}>
+            <InfoBlockValue button onClick={() => this.props.stopTrackingLocation()}>
               {locationTrack.id !== null ? 'ON' : 'OFF'}
-            </OnOff>
-          </Info>
-          <Info splitted={true} >
+            </InfoBlockValue>
+          </InfoBlock>
+          <InfoBlock splitted>
             Last Updated
-            <Value>
+            <InfoBlockValue>
               {lastUpdated}
-            </Value>
-          </Info>
-          <Info splitted={true} >
+            </InfoBlockValue>
+          </InfoBlock>
+          <InfoBlock splitted>
             Distance
-            <Value>
+            <InfoBlockValue>
               {locationTrack.dist !== null
                 ? locationTrack.dist + ' m'
                 : '?'}
-            </Value>
-          </Info>
-          <Info splitted={true} >
+            </InfoBlockValue>
+          </InfoBlock>
+          <InfoBlock splitted>
             Angle
-            <Value>
+            <InfoBlockValue>
               {locationTrack.angle !== null
                 ? locationTrack.angle + ' °'
                 : '?'}
-            </Value>
-          </Info>
-          <Info onClick={this.toggleLinkVisibility}>
+            </InfoBlockValue>
+          </InfoBlock>
+          <InfoBlock onClick={this.toggleLinkVisibility} button>
             {this.state.linkVisible ? 'Hide Link' : 'Show Link'}
-          </Info>
-          <Info hidden={!this.state.linkVisible} link>
-            <StyledShareLink target="_blank" href={locationTrack.shareLink}>{locationTrack.shareLink}</StyledShareLink>
-          </Info>
+          </InfoBlock>
+          <InfoBlock hidden={!this.state.linkVisible} link>
+            <a target="_blank" href={locationTrack.shareLink}>{locationTrack.shareLink}</a>
+          </InfoBlock>
         </StyledMonitorDiv >
       )
-    }
-    return null
+    } else return null
   }
 }
 

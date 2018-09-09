@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import history from './history'
 import { StyledMenuContainer, FlexMarginAuto } from './components/StyledLayout'
 import { Button } from './components/Buttons'
@@ -10,8 +9,8 @@ import SharedLocation from './components/map/SharedLocation'
 import TrackedLocation from './components/map/TrackedLocation'
 import UserLocation from './components/map/UserLocation'
 import { trackUserLocation } from './reducers/userLocationReducer'
-import { submitLocationShareStart } from './reducers/locationShareReducer'
-import { submitLocationRequest } from './reducers/locationTrackReducer'
+import { createLocationShare } from './reducers/locationShareReducer'
+import { createLocationRequest } from './reducers/locationTrackReducer'
 import TrackLocationStarter from './components/TrackLocationStarter'
 import LocationShareStarter from './components/LocationShareStarter'
 import LocationShareMonitor from './components/LocationShareMonitor'
@@ -30,8 +29,8 @@ class App extends Component {
           <StyledMenuContainer>
             <Route exact path='/' render={() =>
               <FlexMarginAuto>
-                <Button onClick={(e) => this.props.submitLocationShareStart(e)}>Share Location</Button>
-                <Button onClick={(e) => this.props.submitLocationRequest(e)}>Request Location</Button>
+                <Button onClick={(e) => this.props.createLocationShare(e)}>Share Location</Button>
+                <Button onClick={(e) => this.props.createLocationRequest(e)}>Request Location</Button>
               </FlexMarginAuto>}
             />
             <Route exact path='/tracklocation' component={TrackLocationStarter} />
@@ -53,8 +52,8 @@ class App extends Component {
 
 const mapDispatchToProps = {
   trackUserLocation,
-  submitLocationShareStart,
-  submitLocationRequest
+  createLocationShare,
+  createLocationRequest
 }
 
 const ConnectedApp = connect(null, mapDispatchToProps)(App)
