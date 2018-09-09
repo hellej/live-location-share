@@ -93,8 +93,8 @@ export const startTrackingLocation = (id) => {
     const trackedLocation = await locationShareService.getLocationShare(id)
     if (trackedLocation !== null) {
       dispatch({ type: 'UPDATE_TRACKED_LOCATION', trackedLocation, id })
-      dispatch(setLastUpdatedTime())
     }
+    dispatch(setLastUpdatedTime())
     const link = getShareLocationLink(id)
     dispatch({ type: 'SET_TRACKING_ON', id })
     dispatch({ type: 'SET_LINK_FOR_TRACK', link })
