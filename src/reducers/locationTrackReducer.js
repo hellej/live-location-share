@@ -99,8 +99,8 @@ export const startTrackingLocation = (id) => {
     dispatch({ type: 'SET_TRACKING_ON', id })
     dispatch({ type: 'SET_LINK_FOR_TRACK', link })
 
-    locationShareService.onLocationShareChanged(id)(snapshot => {
-      const trackedLocation = snapshot.val()
+    locationShareService.getUpdatedLocationShare(id)(location => {
+      const trackedLocation = location.val()
       if (trackedLocation !== null) {
         console.log('trackedlocation: ', trackedLocation)
         dispatch({ type: 'UPDATE_TRACKED_LOCATION', trackedLocation, id })
@@ -127,7 +127,7 @@ export const setLastUpdatedTime = () => {
 
 export const createLocationRequest = () => {
   return async (dispatch) => {
-    const id = await locationShareService.addLocationShare()
+    const id = await locationShareService.createLocationShare()
     console.log('created request with id: ', id)
     dispatch({ type: 'SET_TRACKING_ON', id })
     history.push(`/tracklocation/${id}`)

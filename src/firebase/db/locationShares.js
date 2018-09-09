@@ -1,6 +1,6 @@
 import { db } from './../firebase'
 
-export const addLocationShare = async () => {
+export const createLocationShare = async () => {
   const ref = await db.ref('/locationShares').push()
   return ref.key
 }
@@ -14,17 +14,7 @@ export const getLocationShare = async (id) => {
   return ref.val()
 }
 
-export const onLocationShareChanged = (id) => (snapshot) => {
+export const getUpdatedLocationShare = (id) => (location) => {
   const ref = db.ref(`/locationShares/${id}`)
-  return ref.on('value', (snapshot))
-}
-
-export const asdf = () => {
-  const id = '-LGoR-bk9SxHW0rzEXFE'
-  const ref = db.ref(`/locationShares/${id}`)
-  return ref.on('value', (snapshot) => {
-    const location = snapshot.val()
-    console.log('changed location: ', { location })
-    return location
-  })
+  return ref.on('value', (location))
 }

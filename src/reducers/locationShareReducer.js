@@ -66,8 +66,8 @@ export const createLocationShare = (e) => {
   e.preventDefault()
   return async (dispatch) => {
     dispatch({ type: 'SET_SHARING_TRUE' })
-    const shareId = await locationShareService.addLocationShare()
-    dispatch(startSharingLocation(shareId))
+    const id = await locationShareService.createLocationShare()
+    dispatch(startSharingLocation(id))
   }
 }
 
