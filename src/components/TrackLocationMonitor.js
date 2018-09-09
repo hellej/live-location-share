@@ -60,7 +60,7 @@ class TrackLocationMonitor extends React.Component {
           <InfoBlock onClick={this.toggleLinkVisibility} button>
             {this.state.linkVisible ? 'Hide Link' : 'Show Link'}
           </InfoBlock>
-          <InfoBlock hidden={!this.state.linkVisible} link>
+          <InfoBlock hidden={!this.state.linkVisible || locationTrack.shareLink === ''} link>
             <a target="_blank" href={locationTrack.shareLink}>{locationTrack.shareLink}</a>
           </InfoBlock>
         </StyledMonitorDiv >
