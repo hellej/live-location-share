@@ -9,7 +9,7 @@ class TrackLocationMonitor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      linkVisible: false
+      linkVisible: true
     }
   }
 
