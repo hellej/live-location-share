@@ -5,16 +5,16 @@ import { startTrackingLocation, createLocationRequest } from '../reducers/locati
 class TrackLocationStarter extends React.Component {
 
   componentDidMount = async () => {
-    const locationShareId = this.props.match.params.id
+    const id = this.props.match.params.id
     const tracking = this.props.locationTrack.tracking
     console.log('tracking: ', tracking)
 
-    if (locationShareId === undefined && !tracking) {
+    if (id === undefined && !tracking) {
       console.log('no track id -> create request')
       await this.props.createLocationRequest()
     } else {
-      console.log('id in trackLocation mount(): ', locationShareId)
-      this.props.startTrackingLocation(locationShareId)
+      console.log('id in trackLocation mount(): ', id)
+      this.props.startTrackingLocation(id)
     }
   }
 

@@ -5,11 +5,11 @@ import { startSharingLocation } from '../reducers/locationShareReducer'
 class LocationShareStarter extends React.Component {
 
   componentDidMount() {
-    const locationShareId = this.props.match.params.id
+    const id = this.props.match.params.id
     const locationShare = this.props.locationShare
-    if (!locationShare.sharing && locationShareId) {
+    if (!locationShare.sharing && id) {
       console.log('locationShare in starter: ', locationShare)
-      this.props.startSharingLocation(locationShareId)
+      this.props.startSharingLocation(id)
     }
   }
 

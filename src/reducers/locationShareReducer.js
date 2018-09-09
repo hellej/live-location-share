@@ -71,16 +71,16 @@ export const createLocationShare = (e) => {
   }
 }
 
-export const startSharingLocation = (shareId) => {
+export const startSharingLocation = (id) => {
   return async (dispatch) => {
-    console.log('startSharingLocation: ', shareId)
-    dispatch(updateSharedLocation(shareId))
-    history.push(`/sharelocation/${shareId}`)
-    dispatch({ type: 'SUBMIT_LOCATION_SHARE', shareLink: getTrackLocationLink(shareId), id: shareId })
+    console.log('startSharingLocation: ', id)
+    dispatch(updateSharedLocation(id))
+    history.push(`/sharelocation/${id}`)
+    dispatch({ type: 'SUBMIT_LOCATION_SHARE', shareLink: getTrackLocationLink(id), id })
   }
 }
 
-export const updateSharedLocation = (shareId) => {
+export const updateSharedLocation = (id) => {
   return async (dispatch) => {
     const watchPosition = async (pos) => {
       const lng = pos.coords.longitude
@@ -92,14 +92,14 @@ export const updateSharedLocation = (shareId) => {
         lngLat: { lng, lat },
         geoJSONPoint
       })
-      locationShareService.updateLocationShare(shareId, geoJSONPoint)
+      locationShareService.updateLocationShare(id, geoJSONPoint)
     }
     const navWatchId = navigator.geolocation.watchPosition(watchPosition, geoError, geoOptions)
     dispatch({ type: 'UPDATE_NAV_WATCH_ID', navWatchId })
   }
 }
 
-export const stopSharingLocation = (shareId) => {
+export const stopSharingLocation = () => {
   return async (dispatch) => {
     history.push('/')
     dispatch({ type: 'STOP_SHARING_LOCATION' })
@@ -110,8 +110,8 @@ const geoError = (error) => {
   console.log('no location available')
 }
 
-const getTrackLocationLink = (shareId) => {
-  return `https://livelocationdemo.firebaseapp.com/tracklocation/${shareId}`
+const getTrackLocationLink = (id) => {
+  return `https://livelocationdemo.firebaseapp.com/tracklocation/${id}`
 }
 
 export default locationShareReducer
